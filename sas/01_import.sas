@@ -1,3 +1,4 @@
+
 /* 01_import.sas: load the 8 raw files into the RAW library, as they arrive */
 %include "%sysget(HOME)/BERKA/code/00_setup.sas";
 
@@ -41,14 +42,14 @@ run;
 
 data raw.order;
   infile "&rawdir/order.asc" dsd dlm=';' firstobs=2 truncover termstr=crlf;
-  length order_id account_id 8 bank_to $2 account_to $10 amount 8 k_symbol $10;
+  length order_id account_id 8 bank_to $2 account_to $10 amount 8 k_symbol $20;
   input order_id account_id bank_to account_to amount k_symbol;
 run;
 
 data raw.trans;
   infile "&rawdir/trans.asc" dsd dlm=';' firstobs=2 truncover termstr=crlf;
   length trans_id account_id 8 date $6 type $10 operation $20
-         amount balance 8 k_symbol $10 bank $2 account $10;
+         amount balance 8 k_symbol $20 bank $2 account $10;
   input trans_id account_id date type operation amount balance
         k_symbol bank account;
 run;
